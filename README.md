@@ -49,5 +49,44 @@ $ man git-<verb>
 
 # 2. Git Basics
 
+Getting a Git Repository
+--------------------------
+You typically obtain a Git repository in one of two ways:
+1. You can take a local directory that is currently not under version control, and turn it into a Git repository, or
+2. You can clone an existing Git repository from elsewhere.
+
+If you want to start version-controlling existing files (as opposed to an empty directory), you should probably begin tracking those files and do an initial commit. You can accomplish that with a few git add commands that specify the files you want to track, followed by a git commit:
+
+```
+$ git init
+$ git add *.c
+$ git add LICENSE
+$ git commit -m 'initial project version'
+```
+If you want to clone the Git linkable library, you can specify the new directory name as an additional argument:
+```
+$ git clone https://github.com/libgit2/libgit2 mylibgit
+```
+Recording Changes to the Repository
+-----------------------------------
+Checking the Status of Your Files: `git status`
+(GitHub changed the default branch name from master to main in mid-2020, and other Git hosts followed suit. However, Git itself still uses master as the default, so we will use it throughout the book.)
+Tracking New Files: `git add README`
+
+For convenience, you can try `git add -u` or `git add -A`
+
+Ignoring Files
+---------------
+You can create a file listing patterns to match them named `.gitignore`.
+
+The rules for the patterns you can put in the .gitignore file are as follows:
+1. Blank lines or lines starting with # are ignored.
+2. Standard glob patterns work, and will be applied recursively throughout the entire working tree.
+3. You can start patterns with a forward slash (/) to avoid recursivity.
+4. You can end patterns with a forward slash (/) to specify a directory.
+5. You can negate a pattern by starting it with an exclamation point (!).
+
+
+
 
 
