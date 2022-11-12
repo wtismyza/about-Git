@@ -86,7 +86,63 @@ The rules for the patterns you can put in the .gitignore file are as follows:
 4. You can end patterns with a forward slash (/) to specify a directory.
 5. You can negate a pattern by starting it with an exclamation point (!).
 
+Viewing Your Staged and Unstaged Changes
+----------------------------------------
+To see what you’ve changed but not yet staged, type `git diff` with no other arguments.
+If you want to see what you’ve staged that will go into your next commit, you can use `git diff --staged` (or git diff --cached). This command compares your staged changes to your last commit.
 
 
+Committing Your Changes
+-----------------------
+The simplest way to commit is to type `git commit`.
+Alternatively, you can type your commit message inline with the commit command by specifying it after a -m flag: `git commit -m "commit message hahaha"`
 
+You can also skip the staging area: adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit, letting you skip the git add part.
+
+
+Removing Files
+--------------
+run git rm, it stages the file’s removal.
+
+Another useful thing you may want to do is to keep the file in your working tree but remove it from your staging area. In other words, you may want to keep the file on your hard drive but not have Git track it anymore. This is particularly useful if you forgot to add something to your `.gitignore` file and accidentally staged it, like a large log file or a bunch of .a compiled files. To do this, use the `--cached` option:
+
+```$ git rm --cached README```
+
+You can pass files, directories, and file-glob patterns to the git rm command. That means you can do things such as:
+
+```$ git rm log/\*.log```
+Note the backslash (`\`) in front of the `*`. This is necessary because Git does its own filename expansion in addition to your shell’s filename expansion. This command removes all files that have the `.log` extension in the `log/` directory. Or, you can do something like this:
+
+$ git rm \*~
+This command removes all files whose names end with a ~.
+
+Moving Files
+------------
+
+Unlike many other VCSs, Git doesn’t explicitly track file movement. If you rename a file in Git, no metadata is stored in Git that tells it you renamed the file. However, Git is pretty smart about figuring that out after the fact.
+
+If you want to rename a file in Git, you can run something like:
+```$ git mv file_from file_to```
+
+However, this is equivalent to running something like this:
+```
+$ mv README.md README
+$ git rm README.md
+$ git add README
+```
+
+Viewing the Commit History
+--------------------------
+Run `git log` command, to see what has happened.
+
+One of the more helpful options is `-p` or `--patch`, which shows the difference (the patch output) introduced in each commit. You can also limit the number of log entries displayed, such as using`-2` to show only the last two entries.
+
+If you want to see some abbreviated stats for each commit, you can use the `--stat` option.
+
+Another really useful option is --pretty. This option changes the log output to formats other than the default. A few prebuilt option values are available for you to use. The oneline value for this option prints each commit on a single line, which is useful if you’re looking at a lot of commits.
+
+**A really good command line:**
+```git log --graph --pretty=oneline --abbrev-commit```
+
+Preventing the display of merge commits: Depending on the workflow used in your repository, it’s possible that a sizable percentage of the commits in your log history are just merge commits, which typically aren’t very informative. To prevent the display of merge commits cluttering up your log history, simply add the log option `--no-merges`.
 
