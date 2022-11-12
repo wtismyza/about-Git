@@ -96,3 +96,17 @@ Another really useful option is --pretty. This option changes the log output to 
 ```git log --graph --pretty=oneline --abbrev-commit```
 
 Preventing the display of merge commits: Depending on the workflow used in your repository, it’s possible that a sizable percentage of the commits in your log history are just merge commits, which typically aren’t very informative. To prevent the display of merge commits cluttering up your log history, simply add the log option `--no-merges`.
+
+Undoing Things
+---------------
+One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess up your commit message. If you want to redo that commit, make the additional changes you forgot, stage them, and commit again using the `--amend` option:
+
+```$ git commit --amend```
+This command takes your staging area and uses it for the commit. If you’ve made no changes since your last commit (for instance, you run this command immediately after your previous commit), then your snapshot will look exactly the same, and all you’ll change is your commit message.
+
+**Unstaging a Staged File**: `git reset HEAD <file>`
+
+**Unmodifying a Modified File**: `git checkout -- <file>`
+
+
+
