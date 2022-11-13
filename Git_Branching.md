@@ -198,6 +198,39 @@ To https://github.com/schacon/simplegit
  - [deleted]         serverfix
 ```
 
+Rebasing
+--------
+In Git, there are two main ways to integrate changes from one branch into another: the **merge** and the **rebase**.
+
+With the rebase command, you can take all the changes that were committed on one branch and replay them on a different branch.
+
+For this example, you would check out the experiment branch, and then rebase it onto the master branch as follows:
+```
+$ git checkout experiment
+$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: added staged command
+```
+This operation works by going to the common ancestor of the two branches (the one you’re on and the one you’re rebasing onto), getting the diff introduced by each commit of the branch you’re on, saving those diffs to temporary files, resetting the current branch to the same commit as the branch you are rebasing onto, and finally applying each change in turn.
+
+At this point, you can go back to the `master` branch and do a fast-forward merge.
+```
+$ git checkout master
+$ git merge experiment
+```
+Suppose you decide that you want to merge your client-side changes into your mainline for a release, but you want to hold off on the server-side changes until it’s tested further. You can take the changes on `client` that aren’t on server and replay them on your `master` branch by using the `--onto` option of `git rebase`:
+
+```$ git rebase --onto master server client```
+
+Now you can fast-forward your master branch: 
+```
+$ git checkout master
+$ git merge client
+```
+
+**Question: how to cancel rebase?**
+
+
 
 
 
