@@ -48,4 +48,7 @@ $ man git-<verb>
 ```
 
 [Git Basics](./Git_Basics.md)
+
 [Git Branching](./Git_Branching.md)
+
+[Distributed Git](./Distributed_Git.md)
