@@ -108,6 +108,21 @@ $ git add -i
 What now>
 ```
 
+Git Tools - Stashing and Cleaning
+-------------
+
+**Stashing Your Work**: `$ git stash`
+```
+$ git stash list
+stash@{0}: WIP on master: 049d078 Create index file
+stash@{1}: WIP on master: c264051 Revert "Add file_size"
+stash@{2}: WIP on master: 21d80a5 Add number to log
+```
+In this case, two stashes were saved previously, so you have access to three different stashed works. You can reapply the one you just stashed by using the command shown in the help output of the original stash command: `git stash apply`. If you want to apply one of the older stashes, you can specify it by naming it, like this: git stash apply `stash@{2}`. If you don’t specify a stash, Git assumes the most recent stash and tries to apply it.
+
+The changes to your files were reapplied, but the file you staged before wasn’t restaged. To do that, you must run the git stash apply command with a --index option to tell the command to try to reapply the staged changes. If you had run that instead, you’d have gotten back to your original position.
+
+The apply option only tries to apply the stashed work — you continue to have it on your stack. To remove it, you can run `git stash drop` with the name of the stash to remove.
 
 
 
